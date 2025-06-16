@@ -1,0 +1,130 @@
+<!--&lt;!&ndash; templates/add_book.html &ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Add Book</title>-->
+<!--    <style>-->
+<!--        body { font-family: Arial; margin: 30px; }-->
+<!--        h1 { color: #333; }-->
+<!--        form { margin-top: 20px; }-->
+<!--        input, select { padding: 8px; margin-right: 10px; }-->
+<!--        button { padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; }-->
+<!--        a { display: inline-block; margin-top: 20px; color: #007bff; text-decoration: none; }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Add a New Book</h1>-->
+<!--    <form method="POST" action="{{ url_for('main.add_book') }}">-->
+<!--        <input type="text" name="title" placeholder="Book Title" required>-->
+<!--        <input type="text" name="author" placeholder="Author" required>-->
+<!--        <select name="status">-->
+<!--            <option value="Not read">Not read</option>-->
+<!--            <option value="Reading">Reading</option>-->
+<!--            <option value="Read">Read</option>-->
+<!--        </select>-->
+<!--        <button type="submit">Add Book</button>-->
+<!--    </form>-->
+
+<!--    <a href="{{ url_for('main.index') }}">← Back to list</a>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>➕ Add a New Book</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #eef2f3;
+        }
+
+        header {
+            background: linear-gradient(to right, #28a745, #77dd77);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input, select {
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #28a745;
+            outline: none;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            padding: 12px;
+            font-size: 1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>➕ Add a New Book</h1>
+    </header>
+    <div class="container">
+        <form method="POST" action="{{ url_for('main.add_book') }}">
+            <input type="text" name="title" placeholder="Book Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <select name="status" required>
+                <option value="" disabled selected>Status</option>
+                <option value="Not read">Not read</option>
+                <option value="Reading">Reading</option>
+                <option value="Read">Read</option>
+            </select>
+            <button type="submit">Add Book</button>
+        </form>
+        <a class="back-link" href="{{ url_for('main.index') }}">← Back to book list</a>
+    </div>
+</body>
+</html>
