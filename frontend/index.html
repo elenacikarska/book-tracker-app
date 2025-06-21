@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Tracker Frontend</title>
+  <script>
+    async function loadBooks() {
+      const response = await fetch("/api/books"); // Ingress ќе рутира
+      const books = await response.json();
+      const list = document.getElementById("books");
+      books.forEach(book => {
+        const li = document.createElement("li");
+        li.textContent = `${book.title} by ${book.author}`;
+        list.appendChild(li);
+      });
+    }
+
+    window.onload = loadBooks;
+  </script>
+</head>
+<body>
+  <h1>📚 Book Tracker</h1>
+  <ul id="books"></ul>
+</body>
+</html>

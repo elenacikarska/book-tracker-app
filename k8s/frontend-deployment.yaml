@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-tracker-frontend
+  namespace: book-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-tracker-frontend
+  template:
+    metadata:
+      labels:
+        app: book-tracker-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: elenacikarska/book-tracker-frontend:latest
+        ports:
+        - containerPort: 80

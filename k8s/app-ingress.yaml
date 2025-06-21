@@ -7,12 +7,19 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - http:
-        paths:
-          - path: /book
-            pathType: Prefix
-            backend:
-              service:
-                name: book-tracker-service
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /book
+        pathType: Prefix
+        backend:
+          service:
+            name: book-tracker-service
+            port:
+              number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: book-tracker-frontend-service
+            port:
+              number: 80
