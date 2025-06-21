@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-tracker-app
+  namespace: book-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: book-tracker
+  template:
+    metadata:
+      labels:
+        app: book-tracker
+    spec:
+      containers:
+        - name: book-tracker
+          image: elenacikarska/book-tracker-app:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: FLASK_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: FLASK_ENV
+            - name: SQLALCHEMY_DATABASE_URI
+              value: postgresql://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_NAME)
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DATABASE_USER
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATABASE_HOST
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATABASE_PORT
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DATABASE_NAME
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: SECRET_KEY
