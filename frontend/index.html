@@ -4,7 +4,7 @@
   <title>Book Tracker Frontend</title>
   <script>
     async function loadBooks() {
-      const response = await fetch("/api/books"); // Ingress ќе рутира
+      const response = await fetch("/api/books"); 
       const books = await response.json();
       const list = document.getElementById("books");
       books.forEach(book => {
