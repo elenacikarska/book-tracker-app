@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: book-tracker-service
+  name: web
   namespace: book-tracker
 spec:
   selector:
-    app: book-tracker
+    app: web
   ports:
     - protocol: TCP
       port: 80
       targetPort: 5000
-  type: ClusterIP

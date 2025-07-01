@@ -7,4 +7,4 @@ data:
   FLASK_ENV: "production"
   DATABASE_HOST: "postgres"
   DATABASE_PORT: "5432"
-  DATABASE_NAME: "bookdb"
+  DATABASE_NAME: "booktrackerdb"

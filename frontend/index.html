@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>Book Tracker Frontend</title>
-  <script>
-    async function loadBooks() {
-      const response = await fetch("/api/books"); // Ingress ќе рутира
-      const books = await response.json();
-      const list = document.getElementById("books");
-      books.forEach(book => {
-        const li = document.createElement("li");
-        li.textContent = `${book.title} by ${book.author}`;
-        list.appendChild(li);
-      });
-    }
+<!--  <script>-->
+<!--    const API_BASE = "http://localhost:5000";-->
+<!--    async function loadBooks() {-->
+<!--      const response = await fetch("/api/books")-->
+<!--      const books = await response.json();-->
+<!--      const list = document.getElementById("books");-->
+<!--      books.forEach(book => {-->
+<!--        const li = document.createElement("li");-->
+<!--        li.textContent = `${book.title} by ${book.author}`;-->
+<!--        list.appendChild(li);-->
+<!--      });-->
+<!--    }-->
 
-    window.onload = loadBooks;
-  </script>
+<!--    window.onload = loadBooks;-->
+<!--  </script>-->
+  <script>
+  const API_BASE = "http://localhost:5000";      // ➜ бекенд порт
+
+  async function loadBooks() {
+    const res   = await fetch(`${API_BASE}/api/books`);
+    if (!res.ok) {                       // додади елегантно handle‑ирање
+      throw new Error(await res.text());
+    }
+    const books = await res.json();
+    const list  = document.getElementById("books");
+    list.innerHTML = "";                 // исчисти пред ново полнење
+    books.forEach(b => {
+      const li = document.createElement("li");
+      li.textContent = `${b.title} — ${b.author}`;
+      list.appendChild(li);
+    });
+  }
+
+  window.onload = loadBooks;
+</script>
 </head>
 <body>
   <h1>📚 Book Tracker</h1>

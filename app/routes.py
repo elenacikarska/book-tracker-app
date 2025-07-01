@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from .models import Book
 from . import db
 
@@ -8,6 +8,12 @@ main = Blueprint('main', __name__)
 def index():
     books = Book.query.all()
     return render_template('index.html', books=books)
+
+@main.route('/api/books')
+def get_books():
+    books = Book.query.all()
+    return jsonify([book.to_dict() for book in books])
+
 
 @main.route('/add', methods=['GET', 'POST'])
 def add_book():
